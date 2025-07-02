@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from pprint import pprint
 
 load_dotenv()
-#chat_id = 1737086827
+#chat_id = XXXXXXXXX
 
 
 
