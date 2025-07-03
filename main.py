@@ -7,7 +7,9 @@ from pprint import pprint
 from random import randint
 
 load_dotenv()
-#chat_id = xxxxxx
+#chat_id = 1737086827
+
+
 
 # === Funciones auxiliares ===
 def procesar_texto_funcion(texto):
