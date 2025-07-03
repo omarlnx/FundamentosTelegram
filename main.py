@@ -7,7 +7,7 @@ from pprint import pprint
 from random import randint
 
 load_dotenv()
-#chat_id = 1737086827
+#chat_id = 
 
 
 
