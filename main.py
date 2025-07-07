@@ -26,6 +26,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     Comandos disponibles:\n
     /procesar <texto> - Procesa el texto con reglas de ejemplo\n
     /playlist Laurita garza, La desentendida, agua salada, Friday in my love, Fallaste corazon\n
+    /tareas "Cargar mi celular"\n
     '''
     await update.message.reply_text(welcome_msg)
 
@@ -106,6 +107,50 @@ async def procesar_playlist (update: Update, context: ContextTypes.DEFAULT_TYPE 
     playlist_usuario.sort()
     await update.message.reply_text(f'Te comparto tu playlist oredenada de manera alfabetica:🔤\n{playlist_usuario}')
 
+async def procesar_tareas (update: Update, context: ContextTypes.DEFAULT_TYPE)->None:
+    tareas_usuario = context.args
+    print(f'El usuario ha ingreados las tareas: {tareas_usuario}')
+    #Convertir la lista recibida en un solo string     #['Ir', 'al', 'dentista,', 'ir', 'al', 'cajero']
+    #tarea_string = " ".join(tareas_usuario)  #Ir al dentista, ir al cajero
+    #await update.message.reply_text(f'Lista convertida en 1 solo string: {tarea_string}')
+
+    #Trabajamos con  tareas_usuario, nos da una lista de cada palabra ['Ir', 'al', 'dentista,', 'ir', 'al', 'cajero']
+    #Recorremos cada palabra e identificamos ',' para separar las tareas
+    frase_actual = []
+    resultado = []
+
+    for palabra in tareas_usuario:
+        frase_actual.append(palabra)
+        if palabra.endswith(','):
+            resultado.append(" ".join(frase_actual))
+            frase_actual = []
+
+    if frase_actual:
+        resultado.append(" ".join(frase_actual))
+
+    print(f'El usuario ha ingresado las siguientes tareas {resultado}')
+    #La variable 'resultado contiene una lista de strings de tareas ' ['Ir al dentista,', 'estudiar el tema Diccionarios y funciones,', 'bañarse,', 'lavar la ropa']
+    await update.message.reply_text(f'Has ingresado {len(resultado)} tareas\n {" ".join(resultado)}')
+
+    #Mostrar las tareas como lista
+
+    for task in resultado:
+        #task_clean = task.removesuffix(',')        
+        print(task)
+        #lista_tareas = "\n".join([f"-{enumerate(resultado, start=1)}{task.removesuffix(',').capitalize()}" for task in resultado])
+        lista_tareas = "\n".join([f"-{i} {task.removesuffix(',').capitalize()}" for i, task in enumerate(resultado, start=1)])
+
+    await update.message.reply_text(f'{len(resultado)} Tareas en lista:\n{lista_tareas}')
+
+
+
+
+
+
+    
+
+
+
 
     
 
@@ -129,6 +174,8 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("procesar", procesar_texto))
     application.add_handler(CommandHandler("playlist", procesar_playlist))
+    application.add_handler(CommandHandler("tareas", procesar_tareas))
+
 
     #application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 

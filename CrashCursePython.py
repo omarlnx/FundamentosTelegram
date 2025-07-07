@@ -1159,6 +1159,7 @@ print("="*80 + "\n")
 
 #endregion
 
+
 #region CAPÍTULO 5: IF STATEMENTS (Declaraciones if)
 
 # ======================================================================================================================
@@ -1581,6 +1582,7 @@ for palabra_prohibida in palabras_prohibidas:
     if palabra_prohibida in frase_analizar_2.lower():
         es_seguro = False
         break # Detiene el bucle si encuentra una palabra prohibida.
+    
 if es_seguro:
     print("9. Contenido seguro.")
 else:
@@ -1608,6 +1610,11 @@ else:
 print("\n" + "="*80)
 print("=== FIN EJERCICIOS DESAFÍO CAPÍTULO 5 ===")
 print("="*80 + "\n")
+
+
+
+
+
 
 #endregion
 
